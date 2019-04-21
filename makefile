@@ -1,6 +1,7 @@
 
 container_php       = app
 container_db        = db
+container_server    = webserver
 
 #############################################
 ###                                       ###
@@ -41,5 +42,5 @@ connect_app: #Connect to APP container
 connect_db: #Connect to DB container
 	@docker-compose exec $(container_db) bash
 
-run_server: #Run laravel dev server
-	@docker-compose exec $(container_php) php app/artisan serve --port=8000 --host=0.0.0.0
+connect_server: #Connect to container_server container
+	@docker-compose exec $(container_server) /bin/sh
