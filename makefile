@@ -44,3 +44,6 @@ connect_db: #Connect to DB container
 
 connect_server: #Connect to container_server container
 	@docker-compose exec $(container_server) /bin/sh
+
+route_list: #Show all routes
+	@docker-compose exec $(container_php) php artisan route:list
