@@ -15,28 +15,15 @@ Route::get('/', function () { // URI - laravel.loc/posts/1
     return view('welcome');
 });
 
+Route::get('/things', 'ThingsController@index');
+Route::get('/things/{id}', 'ThingsController@show');
+Route::post('/things', 'ThingsController@store');
+Route::put('/things/{id}', 'ThingsController@update');
+Route::delete('/things/{id}', 'ThingsController@destroy');
 
-Route::get('/about', function (){
-    return "About";
-})->name('about');
+Route::get('/js_frameworks/method', 'JSFrameworksController@method')->name('js_frameworks.method');
 
-
-Route::group(['prefix' => 'posts', 'as' => 'posts.'],function (){
-    Route::get('/', function (){
-        return "
-        
-        <div>Posts</div>
-        <a href='".route('about')."'>About</a>
-        <a href='".route('posts.show', ['id' => 1])."'>Post #1</a>
-        
-        ";
-    })->name('index');
-
-    Route::get('/{id}', function (){
-        return "Posts";
-    })->name('show');
-
-    Route::post('/', function (){
-        return "Posts";
-    });
-});
+Route::resources([
+    '/js_frameworks' => 'JSFrameworksController',
+    '/php_frameworks' => 'PHPFrameworksController'
+]);
